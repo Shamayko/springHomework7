@@ -30,14 +30,16 @@ private ProductRepository productRepository;
         productRepository.deleteById(id);
     }
 
-    public List<Product> findByCostBetween(Integer min, Integer max) {
-        return productRepository.findAllByCostBetween(min, max);
-    }
 
     @Transactional
     public void changeCost(Long productId, Integer delta) {
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Unable to change product's cost. Product not found, id: " + productId));
         product.setCost(product.getCost() + delta);
     }
+
+    public List<Product> findByCostBetween(Integer min, Integer max) {
+        return productRepository.findAllByCostBetween(min, max);
+    }
+
 
 }

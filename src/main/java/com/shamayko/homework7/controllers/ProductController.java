@@ -30,14 +30,15 @@ public class ProductController {
         productService.deleteById(id);
     }
 
+    @GetMapping("/products/cost_between")
+    public List<Product> findByCostBetween(@RequestParam(required = false, defaultValue = "0") Integer min, @RequestParam(required = false, defaultValue = "1000000") Integer max) {
+        return productService.findByCostBetween(min, max);
+    }
+
     @GetMapping("/products/change_cost")
     public void changeCost (@RequestParam Long productId, @RequestParam Integer delta) {
         productService.changeCost(productId, delta);
     }
 
-    @GetMapping("/products/cost_between")
-    public List<Product> findByCostBetween(@RequestParam(required = false, defaultValue = "0") Integer min, @RequestParam(required = false, defaultValue = "1000000") Integer max) {
-        return productService.findByCostBetween(min, max);
-    }
 
 }
