@@ -1,4 +1,6 @@
-package com.shamayko.homework7.entites;
+package com.shamayko.homework7.entities;
+
+import com.shamayko.homework7.dto.ProductDto;
 
 import javax.persistence.*;
 
@@ -12,6 +14,9 @@ public class Product {
 
     @Column(name = "title")
     private String title;
+
+    @Column(name = "cost")
+    private int cost;
 
     public String getTitle() {
         return title;
@@ -29,9 +34,6 @@ public class Product {
         this.cost = cost;
     }
 
-    @Column(name = "cost")
-    private int cost;
-
     public Long getId() {
         return id;
     }
@@ -40,12 +42,17 @@ public class Product {
         this.id = id;
     }
 
-    public Product() {
-    }
+    public Product() {    }
 
     public Product(Long id, String title, int cost) {
         this.id = id;
         this.title = title;
         this.cost = cost;
+    }
+
+    public Product(ProductDto productDto) {
+        this.id = productDto.getId();
+        this.title = productDto.getTitle();
+        this.cost = productDto.getCost();
     }
 }
