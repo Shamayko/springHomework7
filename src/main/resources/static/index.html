@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+
+<div class="container" ng-controller="indexController">
+    <h3>Список продуктов</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>ID</td>
+            <td>Product</td>
+            <td>Cost</td>
+            <td>Action</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in ProductsList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changeCost(p.id, -5)">-</button>
+                {{p.cost}}
+                <button class="btn btn-primary" ng-click="changeCost(p.id, 5)">+</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Исключить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <h3>Фильтр продуктов по стоимости</h3>
+    <form novalidate ng-submit="loadProducts()">
+        <div class="mb-3">
+            <div class="mb-3">
+                <label for="filterTitle">Название продукта</label>
+                <input type="text" class="form-control" id="filterTitle" ng-model="filter.title_part">
+            </div>
+            <label for="filterMinCost">Минимальная стоимость</label>
+            <input type="number" class="form-control" id="filterMinCost" ng-model="filter.min_cost">
+        </div>
+        <div class="mb-3">
+            <label for="filterMaxCost">Максимальная стоимость</label>
+            <input type="number" class="form-control" id="filterMaxCost" ng-model="filter.max_cost">
+        </div>
+        <button type="submit" class="btn btn-primary">Отфильтровать</button>
+    </form>
+    <br>
+
+    <form novalidate ng-submit="createProduct()">
+        <div class="mb-3">
+            <div class="mb-3">
+                <label for="productTitle">Имя продукта</label>
+                <input type="text" class="form-control" id="productTitle" ng-model="newProduct.title">
+            </div>
+            <label for="productCost">Стоимость продукта</label>
+            <input type="number" class="form-control" id="productCost" ng-model="newProduct.cost">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить продукт</button>
+    </form>
+
+</div>
+</body>
+</html>
